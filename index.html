@@ -3,419 +3,264 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>내 마음속 꽃은 무엇일까? | 꽃 심리테스트</title>
-  <meta name="description" content="당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다. 감성적인 꽃 심리테스트를 지금 시작해보세요." />
-  <meta name="keywords" content="꽃 심리테스트, 성격테스트, 꽃 테스트, 나에게 어울리는 꽃, 연애 심리테스트" />
-  <meta property="og:title" content="내 마음속 꽃은 무엇일까?" />
-  <meta property="og:description" content="당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다." />
+  <title>나의 믿음 테스트 | 지금 내 믿음은 어떤 모습으로 자라고 있을까요?</title>
+  <meta name="description" content="나의 믿음 테스트로 기도, 말씀, 예배, 공동체 등 12문항을 통해 지금 내 믿음의 방향성을 따뜻하게 점검해보세요. 교회 청년부, 새가족반, 소그룹, 수련회에서 사용하기 좋은 신앙 테스트." />
+  <meta name="keywords" content="나의 믿음 테스트, 믿음 테스트, 신앙 테스트, 교회 심리테스트, 기독교 테스트, 청년부 테스트, 소그룹 아이스브레이킹" />
+  <meta property="og:title" content="나의 믿음 테스트" />
+  <meta property="og:description" content="지금 내 믿음은 어떤 모습으로 자라고 있을까요? 12문항으로 확인하는 따뜻한 신앙 성장 테스트" />
   <style>
     :root {
-      --rose: #b84f6b;
-      --cream: #fff7ef;
-      --lavender: #c9b6e4;
-      --green: #9ab89a;
-      --ink: #4c4052;
-      --card: rgba(255, 255, 255, 0.82);
-      --shadow: 0 18px 45px rgba(116, 95, 126, 0.18);
-      --radius: 24px;
+      --cream: #f8f3e8; --beige: #efe4ce; --gold: #d4b16a; --deep-green: #2f4a3a;
+      --soft-green: #5b7b68; --card: #fffdf8; --ink: #2f312e; --muted: #6a6f66;
+      --shadow: 0 16px 38px rgba(47, 74, 58, 0.12); --radius: 22px;
     }
-
     * { box-sizing: border-box; }
-
     body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      margin: 0; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
       color: var(--ink);
-      background: radial-gradient(circle at 20% 15%, #ffe8f0 0%, transparent 40%),
-                  radial-gradient(circle at 85% 20%, #e8f6ec 0%, transparent 40%),
-                  radial-gradient(circle at 50% 95%, #efe8fb 0%, transparent 35%),
-                  linear-gradient(140deg, #fff9f1, #f7f0ff 45%, #eef8f1 100%);
-      display: grid;
-      place-items: center;
-      padding: 24px 14px;
-      overflow-x: hidden;
+      background: radial-gradient(circle at 15% 10%, #fff9ec 0%, transparent 35%),
+                  radial-gradient(circle at 85% 20%, #f3ead9 0%, transparent 38%),
+                  linear-gradient(160deg, var(--cream), #f6eedf 45%, #f2e8d6 100%);
+      display: grid; place-items: center; padding: 20px 12px;
     }
-
-    .petals, .petals::before, .petals::after {
-      content: "";
-      position: fixed;
-      inset: -20% -10% auto;
-      height: 140%;
-      pointer-events: none;
-      background-image:
-        radial-gradient(ellipse at center, rgba(255, 171, 200, .42) 0 38%, transparent 40%),
-        radial-gradient(ellipse at center, rgba(207, 185, 238, .33) 0 38%, transparent 40%),
-        radial-gradient(ellipse at center, rgba(168, 213, 174, .28) 0 38%, transparent 40%);
-      background-size: 24px 16px, 18px 12px, 22px 14px;
-      animation: drift 26s linear infinite;
-      opacity: .45;
-      transform: rotate(9deg);
+    .halo, .cross {
+      position: fixed; pointer-events: none; opacity: .2;
     }
-
-    .petals::before { animation-duration: 34s; opacity: .3; transform: rotate(-5deg); }
-    .petals::after { animation-duration: 42s; opacity: .2; transform: rotate(15deg); }
-
-    @keyframes drift {
-      from { background-position: 0 -20%, 60% -20%, 30% -20%; }
-      to { background-position: -120px 120%, 70px 120%, -60px 120%; }
+    .halo { width: 220px; height: 220px; border-radius: 50%; border: 2px solid #dcc08b; top: -40px; right: -40px; }
+    .cross { left: 18px; bottom: 18px; width: 14px; height: 48px; background: #9a8151; border-radius: 10px; }
+    .cross::after { content: ""; position: absolute; top: 14px; left: -12px; width: 38px; height: 12px; background: #9a8151; border-radius: 10px; }
+    .app {
+      width: min(820px, 100%); background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      border: 1px solid #efe5d3; overflow: hidden; position: relative;
     }
-
-    .card {
-      width: min(720px, 100%);
-      background: var(--card);
-      backdrop-filter: blur(6px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, .7);
-      padding: clamp(22px, 4vw, 38px);
-      position: relative;
-      z-index: 1;
+    .app::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(120deg, rgba(212,177,106,0.10), transparent 30% 70%, rgba(47,74,58,0.08));
     }
-
-    h1 { font-size: clamp(1.7rem, 4.2vw, 2.3rem); margin: 0 0 10px; line-height: 1.3; }
-    .subtitle { margin: 0 0 26px; color: #6a5c73; line-height: 1.6; }
-
-    .screen { display: none; animation: fade .35s ease; }
+    .content { padding: clamp(20px, 4.2vw, 36px); position: relative; z-index: 1; }
+    .screen { display: none; animation: fade .25s ease; }
     .screen.active { display: block; }
     @keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
-
+    h1 { margin: 0 0 6px; font-size: clamp(1.7rem, 4.7vw, 2.4rem); }
+    .subtitle { margin: 0 0 16px; color: var(--soft-green); font-weight: 600; }
+    .desc { margin: 0 0 24px; line-height: 1.72; color: #4d504b; }
     .btn {
-      border: 0;
-      border-radius: 999px;
-      padding: 13px 22px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-      font-size: .98rem;
+      border: 0; border-radius: 999px; padding: 13px 20px; font-weight: 700; cursor: pointer; font-size: 1rem;
+      transition: transform .18s ease, filter .18s ease;
     }
-
-    .btn-main {
-      color: #fff;
-      background: linear-gradient(135deg, #c96886, #9f77d7 55%, #7bad89);
-      box-shadow: 0 12px 24px rgba(144, 102, 153, .28);
-    }
-
-    .btn-main:hover { transform: translateY(-1px); filter: saturate(1.05); }
-    .btn-soft { background: #fff; color: #6f5c7b; border: 1px solid #eadff6; }
-
-    .progress-wrap { margin: 0 0 18px; }
-    .progress-top { display: flex; justify-content: space-between; font-size: .9rem; color: #786986; margin-bottom: 7px; }
-    .bar { height: 10px; border-radius: 999px; background: #f2e8f8; overflow: hidden; }
-    .bar > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ef93af, #b899e4, #a9d0ae); transition: width .25s ease; }
-
-    .question { font-size: clamp(1.2rem, 3vw, 1.45rem); margin: 12px 0 18px; line-height: 1.5; }
-    .options { display: grid; gap: 11px; }
-
+    .btn:hover { transform: translateY(-1px); filter: saturate(1.05); }
+    .btn-main { color: #fff; background: linear-gradient(135deg, #3b5f4a, #6f8f79 60%, #c7a866); box-shadow: 0 10px 22px rgba(47,74,58,.2); }
+    .btn-sub { background: #f6f0e4; color: #415547; border: 1px solid #e4d7bf; }
+    .progress-top { display: flex; justify-content: space-between; gap: 10px; color: #6e7369; font-size: .92rem; margin-bottom: 8px; }
+    .bar { height: 11px; background: #ebe2cf; border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #caa25d, #6f8f79); transition: width .25s ease; }
+    .question { margin: 16px 0; font-size: clamp(1.15rem, 3.1vw, 1.38rem); line-height: 1.55; }
+    .options { display: grid; gap: 10px; }
     .option {
-      width: 100%;
-      text-align: left;
-      background: #fff;
-      border: 1px solid #f1e8f6;
-      border-radius: 16px;
-      padding: 14px 15px;
-      color: #574a60;
-      font-size: .98rem;
-      transition: .2s;
-      cursor: pointer;
+      width: 100%; text-align: left; border: 1px solid #ece2cf; border-radius: 14px; background: #fff;
+      padding: 13px 14px; color: #3c413b; font-size: .98rem; cursor: pointer;
     }
-    .option:hover { border-color: #cfb6e8; transform: translateY(-1px); box-shadow: 0 8px 16px rgba(144,120,160,.12); }
-    .option.selected { border-color: #bf89d8; background: #fcf7ff; }
-
-    .nav { display: flex; justify-content: space-between; margin-top: 18px; gap: 10px; }
-
-    .result-flower { font-size: 3rem; margin-bottom: 4px; }
-    .result-title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin: 4px 0 10px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
-    .tag { background: #fff; border: 1px solid #eadcf5; padding: 7px 11px; border-radius: 999px; font-size: .87rem; }
-    .result-box { background: #fff; border: 1px solid #efe5f7; border-radius: 14px; padding: 13px 14px; margin: 10px 0; line-height: 1.6; }
-
-    .result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-    .copy-feedback { font-size: .9rem; color: #6c8b71; margin-top: 8px; min-height: 20px; }
-
-    @media (max-width: 520px) {
-      .card { padding: 20px 16px; border-radius: 20px; }
+    .option:hover, .option.selected { border-color: #8fa792; background: #f7fbf8; }
+    .nav { margin-top: 14px; display: flex; gap: 10px; }
+    .result-badge { display: inline-block; padding: 7px 11px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin-bottom: 8px; }
+    .result-title { margin: 6px 0 8px; font-size: clamp(1.42rem, 3.8vw, 1.9rem); }
+    .stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 14px 0; }
+    .stat, .box { background: #fff; border: 1px solid #ecdfca; border-radius: 14px; padding: 12px 13px; }
+    .label { color: #64705f; font-size: .88rem; }
+    .value { font-weight: 800; margin-top: 3px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+    .tag { background: #f5efe2; border: 1px solid #e2d2b2; border-radius: 999px; padding: 6px 10px; font-size: .86rem; }
+    .box { line-height: 1.65; margin-bottom: 9px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .feedback { min-height: 21px; margin-top: 6px; color: #4f6a58; font-size: .9rem; }
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; }
       .btn { width: 100%; }
-      .nav { flex-direction: column; }
-      .progress-top { font-size: .85rem; }
+      .actions, .nav { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="petals" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="cross" aria-hidden="true"></div>
 
-  <main class="card" role="main">
-    <section id="startScreen" class="screen active">
-      <h1>내 마음속 꽃은 무엇일까?</h1>
-      <p class="subtitle">당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다.</p>
-      <button class="btn btn-main" id="startBtn">테스트 시작하기</button>
-    </section>
+  <main class="app">
+    <div class="content">
+      <section id="startScreen" class="screen active">
+        <h1>나의 믿음 테스트</h1>
+        <p class="subtitle">지금 내 믿음은 어떤 모습으로 자라고 있을까요?</p>
+        <p class="desc">믿음은 하루아침에 완성되는 것이 아니라, 말씀과 기도와 삶 속에서 조금씩 자라납니다. 지금 내 믿음의 상태를 확인하고, 하나님 앞에서 더 깊이 성장할 방향을 찾아보세요.</p>
+        <button id="startBtn" class="btn btn-main">테스트 시작하기</button>
+      </section>
 
-    <section id="questionScreen" class="screen">
-      <div class="progress-wrap">
-        <div class="progress-top">
-          <span id="progressLabel">1 / 10</span>
-          <span>마음의 결을 천천히 담아보세요</span>
-        </div>
+      <section id="questionScreen" class="screen">
+        <div class="progress-top"><span id="progressLabel">1 / 12</span><span>천천히, 솔직한 마음으로</span></div>
         <div class="bar"><span id="progressBar"></span></div>
-      </div>
-      <h2 class="question" id="questionText"></h2>
-      <div class="options" id="options"></div>
-      <div class="nav">
-        <button class="btn btn-soft" id="prevBtn">이전 질문</button>
-      </div>
-    </section>
+        <h2 id="questionText" class="question"></h2>
+        <div id="options" class="options"></div>
+        <div class="nav"><button id="prevBtn" class="btn btn-sub">이전 질문</button></div>
+      </section>
 
-    <section id="resultScreen" class="screen">
-      <div class="result-flower" id="resultEmoji"></div>
-      <h2 class="result-title" id="resultTitle"></h2>
-      <p id="resultDescription"></p>
-      <div class="tags" id="resultTags"></div>
-      <div class="result-box" id="matchFlower"></div>
-      <div class="result-box" id="giftLine"></div>
-      <div class="result-box" id="shareText"></div>
-      <div class="result-actions">
-        <button class="btn btn-main" id="copyBtn">결과 문구 복사</button>
-        <button class="btn btn-soft" id="restartBtn">다시하기</button>
-      </div>
-      <p class="copy-feedback" id="copyFeedback"></p>
-    </section>
+      <section id="resultScreen" class="screen">
+        <div id="resultBadge" class="result-badge"></div>
+        <h2 id="resultTitle" class="result-title"></h2>
+        <p id="resultDesc" class="desc"></p>
+        <div class="stats">
+          <div class="stat"><div class="label">총점</div><div id="scoreText" class="value"></div></div>
+          <div class="stat"><div class="label">믿음 지수</div><div id="percentText" class="value"></div></div>
+        </div>
+        <div class="label">대표 키워드</div><div id="tags" class="tags"></div>
+        <div id="growthBox" class="box"></div>
+        <div id="todayLine" class="box"></div>
+        <div id="prayer" class="box"></div>
+        <div id="shareBox" class="box"></div>
+        <div class="actions">
+          <button id="copyBtn" class="btn btn-main">결과 공유 문구 복사</button>
+          <button id="restartBtn" class="btn btn-sub">다시하기</button>
+        </div>
+        <p id="copyFeedback" class="feedback"></p>
+      </section>
+    </div>
   </main>
 
   <script>
-    // 꽃 결과 데이터: 설명, 키워드, 공유 문구 등을 한 곳에서 관리
-    const flowerProfiles = {
-      rose: {
-        name: "장미", emoji: "🌹", priority: 8,
-        keywords: ["열정", "사랑", "존재감"],
-        description: "감정을 숨기지 않고 진심으로 표현하는 당신은, 관계에 깊고 강한 온도를 남깁니다.",
-        match: "나와 잘 맞는 꽃: 튤립 🌷 — 섬세한 다정함이 당신의 열정을 안정감 있게 받쳐줘요.",
-        gift: "어울리는 선물 문구: ‘당신의 오늘을 가장 찬란하게 믿는 사람으로 남을게요.’",
-        share: "나는 강렬한 진심을 가진 장미형 🌹, 사랑을 뜨겁고 솔직하게 전하는 사람이래."
-      },
-      tulip: {
-        name: "튤립", emoji: "🌷", priority: 7,
-        keywords: ["순수함", "설렘", "따뜻함"],
-        description: "부드럽지만 흔들리지 않는 마음으로, 사람의 하루를 따뜻하게 물들이는 유형입니다.",
-        match: "나와 잘 맞는 꽃: 작약 🌺 — 당신의 순수함을 우아하게 확장해주는 파트너예요.",
-        gift: "어울리는 선물 문구: ‘당신과 함께라면 평범한 날도 봄처럼 설레요.’",
-        share: "나는 포근한 진심의 튤립형 🌷, 작은 배려로 큰 설렘을 만드는 사람이래."
-      },
-      sunflower: {
-        name: "해바라기", emoji: "🌻", priority: 6,
-        keywords: ["긍정", "에너지", "응원"],
-        description: "주변 사람의 가능성을 먼저 발견하고, 밝은 에너지로 분위기를 끌어올리는 사람입니다.",
-        match: "나와 잘 맞는 꽃: 라벤더 💜 — 당신의 활기를 편안한 리듬으로 이어줘요.",
-        gift: "어울리는 선물 문구: ‘당신 덕분에 내 내일이 조금 더 환해졌어요.’",
-        share: "나는 햇살 같은 해바라기형 🌻, 사람들에게 용기와 힘을 나눠주는 타입이래."
-      },
-      lavender: {
-        name: "라벤더", emoji: "💜", priority: 10,
-        keywords: ["안정", "위로", "섬세함"],
-        description: "조용한 공감력으로 사람의 마음을 어루만지며, 깊은 신뢰를 만드는 감성형입니다.",
-        match: "나와 잘 맞는 꽃: 장미 🌹 — 당신의 차분함이 상대의 진심을 더 깊게 피워내요.",
-        gift: "어울리는 선물 문구: ‘말하지 않아도 네 마음의 결을 알아차릴게.’",
-        share: "나는 잔잔한 위로의 라벤더형 💜, 깊은 공감으로 관계를 지켜주는 사람이래."
-      },
-      gypsophila: {
-        name: "안개꽃", emoji: "🤍", priority: 9,
-        keywords: ["배려", "조화", "순수함"],
-        description: "앞에 나서지 않아도 모두를 빛나게 하는 균형감으로, 관계의 온도를 부드럽게 맞춥니다.",
-        match: "나와 잘 맞는 꽃: 해바라기 🌻 — 당신의 배려가 상대의 에너지를 더 멀리 퍼지게 해요.",
-        gift: "어울리는 선물 문구: ‘당신 덕분에 우리의 순간이 더 다정해졌어요.’",
-        share: "나는 조화를 만드는 안개꽃형 🤍, 조용한 배려로 주변을 환하게 하는 사람이래."
-      },
-      peony: {
-        name: "작약", emoji: "🌺", priority: 5,
-        keywords: ["우아함", "풍요", "로맨틱"],
-        description: "감각적인 취향과 풍부한 감정선으로, 일상에 품격 있는 로맨스를 더하는 유형입니다.",
-        match: "나와 잘 맞는 꽃: 튤립 🌷 — 서로의 다정함과 감성을 자연스럽게 키워가요.",
-        gift: "어울리는 선물 문구: ‘당신과의 순간을 오래 기억할 수 있게, 예쁘게 담아둘게요.’",
-        share: "나는 로맨틱한 작약형 🌺, 감각과 애정으로 특별한 분위기를 만드는 사람이래."
-      },
-      camellia: {
-        name: "동백", emoji: "❤️", priority: 4,
-        keywords: ["신념", "헌신", "따뜻한 강인함"],
-        description: "쉽게 흔들리지 않는 중심을 가진 당신은, 오래가는 관계에서 진가를 발휘합니다.",
-        match: "나와 잘 맞는 꽃: 안개꽃 🤍 — 당신의 단단함을 부드럽게 감싸주는 조합이에요.",
-        gift: "어울리는 선물 문구: ‘변함없이 네 편이라는 마음을 매일 증명할게.’",
-        share: "나는 따뜻하게 단단한 동백형 ❤️, 오래 믿고 지켜주는 사랑을 하는 사람이래."
-      }
-    };
-
-    // 10문항, 선택지 4개. 각 선택지는 하나의 꽃 유형에 점수를 부여
+    // 12문항: 각 선택지는 1~4점
     const questions = [
-      { q: "쉬는 날이 생기면 가장 먼저 하고 싶은 건?", a: [
-        ["좋아하는 사람과 분위기 좋은 카페에서 긴 대화", "rose"],
-        ["햇살 좋은 창가에서 책과 차로 느긋하게", "lavender"],
-        ["즉흥으로 근교 나들이, 사진 가득 남기기", "sunflower"],
-        ["집을 정돈하고 향초 켜둔 채 조용히 쉬기", "gypsophila"]] },
-      { q: "받고 싶은 선물의 결은 어떤 쪽에 가까울까?", a: [
-        ["손편지처럼 마음이 또렷한 선물", "tulip"],
-        ["오래 두고 볼수록 멋이 나는 소품", "peony"],
-        ["함께한 추억이 담긴 작은 기록", "gypsophila"],
-        ["강렬한 인상을 남기는 서프라이즈", "rose"]] },
-      { q: "인간관계에서 나는 보통…", a: [
-        ["누구에게나 에너지를 건네는 편", "sunflower"],
-        ["깊어질 사람에게 천천히 마음을 열어", "lavender"],
-        ["상대의 필요를 먼저 살피는 편", "gypsophila"],
-        ["확신이 생기면 끝까지 책임지는 편", "camellia"]] },
-      { q: "사랑을 표현할 때 가장 나다운 방식은?", a: [
-        ["감정을 솔직하게 말과 행동으로 보여준다", "rose"],
-        ["작은 루틴을 꾸준히 지키며 마음을 전한다", "camellia"],
-        ["상대가 좋아할 디테일을 기억해 챙긴다", "tulip"],
-        ["특별한 분위기와 이벤트를 연출한다", "peony"]] },
-      { q: "스트레스를 받으면 나는…", a: [
-        ["몸을 움직이며 기분을 빠르게 환기한다", "sunflower"],
-        ["혼자 있는 시간을 확보하고 감정을 정리한다", "lavender"],
-        ["믿는 사람과 깊게 대화하며 풀어낸다", "rose"],
-        ["정리·청소로 환경부터 안정시킨다", "gypsophila"]] },
-      { q: "가장 오래 머물고 싶은 공간은?", a: [
-        ["은은한 조명과 패브릭이 있는 감성 라운지", "peony"],
-        ["햇빛과 식물이 많은 밝은 거실", "sunflower"],
-        ["미니멀하고 조용한 개인 작업실", "lavender"],
-        ["포근하고 정돈된 다이닝 공간", "tulip"]] },
-      { q: "요즘 더 끌리는 색감은?", a: [
-        ["딥 로즈와 와인 톤", "rose"],
-        ["크림 베이지와 소프트 핑크", "tulip"],
-        ["라일락·뮤트 퍼플", "lavender"],
-        ["올리브·세이지 그린", "gypsophila"]] },
-      { q: "기억에 남는 순간은 어떤 장면이야?", a: [
-        ["서로의 진심을 확인한 고백의 밤", "rose"],
-        ["별일 없어도 웃음이 끊이지 않던 오후", "sunflower"],
-        ["말없이 함께 걸으며 위로받던 시간", "lavender"],
-        ["작은 성공을 함께 축하해준 자리", "camellia"]] },
-      { q: "사람들이 자주 말하는 나의 이미지는?", a: [
-        ["우아하고 취향이 분명한 사람", "peony"],
-        ["편안하고 다정한 사람", "tulip"],
-        ["믿음직하고 묵직한 사람", "camellia"],
-        ["부드럽게 분위기를 맞추는 사람", "gypsophila"]] },
-      { q: "내가 바라는 삶의 분위기에 가장 가까운 건?", a: [
-        ["사랑과 열정이 선명한 인생", "rose"],
-        ["잔잔하지만 깊게 충만한 인생", "lavender"],
-        ["환하고 활기찬 순간이 많은 인생", "sunflower"],
-        ["감각적이고 로맨틱한 장면이 이어지는 인생", "peony"]] }
+      { q: "1. 바쁜 하루 중 기도 시간은 보통 어떻게 가지나요?", options: [["짧게라도 틈틈이 하나님께 마음을 올려드린다",4],["정해진 때는 아니지만 자주 기도하려고 한다",3],["필요한 일이 생길 때 중심으로 기도하는 편이다",2],["기도를 마음먹지만 자주 놓치곤 한다",1]] },
+      { q: "2. 말씀 묵상은 내 일상에서 어떤 모습인가요?", options: [["규칙적으로 읽고, 삶에 연결해보려 한다",4],["주 2~3회 이상은 읽으려 노력한다",3],["교회 모임 때 주로 접하는 편이다",2],["읽고 싶지만 아직 습관이 잘 잡히지 않았다",1]] },
+      { q: "3. 예배를 드릴 때 나의 태도는?", options: [["예배 전부터 마음을 준비하며 집중하려 한다",4],["대체로 집중하지만 컨디션에 따라 흔들린다",3],["익숙한 순서로 참여하지만 몰입이 어려울 때가 있다",2],["참석은 하지만 마음이 분주할 때가 많다",1]] },
+      { q: "4. 고난이나 예상치 못한 어려움을 만나면?", options: [["먼저 하나님 뜻을 구하며 기도 속에 머문다",4],["힘들지만 말씀과 기도로 다시 방향을 잡는다",3],["감정이 앞서지만 시간이 지나면 하나님을 찾는다",2],["눈앞 문제 해결에 몰두해 신앙을 놓치기 쉽다",1]] },
+      { q: "5. 상처 준 사람을 대할 때 나는?", options: [["시간이 걸려도 용서와 화해를 위해 기도한다",4],["쉽지는 않지만 관계 회복을 시도한다",3],["겉으로는 괜찮아도 마음 정리가 오래 걸린다",2],["거리 두며 닫히는 편이다",1]] },
+      { q: "6. 물질과 감사에 대한 내 태도는?", options: [["작은 것에도 감사하며 맡겨진 것을 잘 관리하려 한다",4],["필요를 구하면서 감사 제목도 자주 찾는다",3],["감사는 하지만 걱정이 앞설 때가 많다",2],["감사보다 부족함이 더 크게 보일 때가 많다",1]] },
+      { q: "7. 교회 공동체(청년부/소그룹) 참여는?", options: [["예배뿐 아니라 교제와 섬김에도 꾸준히 참여한다",4],["가능한 범위에서 성실히 참여하려고 한다",3],["상황이 맞을 때만 참여하는 편이다",2],["참여하고 싶지만 아직 어색하고 멀게 느껴진다",1]] },
+      { q: "8. 죄를 깨달았을 때의 반응은?", options: [["바로 하나님 앞에 회개하며 돌이키려 한다",4],["기도하며 점검하고 다시 시작하려 한다",3],["마음에 걸리지만 미루는 때가 있다",2],["불편함을 피하고 넘어가려 할 때가 많다",1]] },
+      { q: "9. 전도와 신앙 고백에 대해 나는?", options: [["삶과 말로 복음을 전할 기회를 의식한다",4],["기회가 오면 자연스럽게 나누려 한다",3],["마음은 있지만 어떻게 말할지 망설인다",2],["부담이 커서 잘 피하게 된다",1]] },
+      { q: "10. 중요한 결정을 앞둘 때 나는?", options: [["기도와 말씀, 조언을 통해 하나님의 뜻을 먼저 구한다",4],["기도하며 방향을 점검한 뒤 결정하려 한다",3],["현실 조건을 먼저 보고 나중에 기도한다",2],["급한 마음으로 결정하고 뒤늦게 돌아본다",1]] },
+      { q: "11. 바쁜 일상에서 신앙의 우선순위는?", options: [["일정 속에 예배·기도·말씀 시간을 먼저 배치한다",4],["바빠도 핵심 루틴은 지키려 노력한다",3],["중요하다고 생각하지만 자주 밀린다",2],["마음은 있으나 생활 리듬에 자주 묻힌다",1]] },
+      { q: "12. 믿음의 성장에 대한 갈망은?", options: [["더 깊이 자라고 싶어 실제 변화를 시도한다",4],["성장하고 싶어 배움의 자리를 찾는다",3],["성장 필요를 느끼지만 아직 망설이는 중이다",2],["요즘은 갈망이 옅어졌지만 다시 회복되길 바란다",1]] }
+    ];
+
+    const results = [
+      { min: 12, max: 20, name: "씨앗 같은 믿음", tone: "🌱", color: "#866f41", desc: "아직 믿음이 작게 느껴질 수 있지만, 하나님은 작은 씨앗도 귀하게 보십니다. 지금 중요한 것은 완성된 모습이 아니라, 다시 하나님께 시선을 돌리는 마음입니다.", keywords: ["시작", "회복", "기도"], growth: ["짧은 기도부터 시작하기", "하루 한 구절 말씀 읽기", "예배 자리에 꾸준히 있기"], today: "오늘 3분만 눈을 감고 ‘하나님, 다시 시작하고 싶습니다’라고 고백해보세요.", prayer: "주님, 제 마음을 다시 주님께 향하게 해주세요. 작은 순종을 통해 믿음이 자라게 하소서." },
+      { min: 21, max: 29, name: "뿌리내리는 믿음", tone: "🌿", color: "#5e7a5d", desc: "믿음의 기초가 조금씩 세워지고 있습니다. 흔들릴 때도 있지만 다시 말씀과 예배로 돌아오려는 마음이 있습니다.", keywords: ["회복", "말씀", "인내"], growth: ["규칙적인 말씀 묵상", "소그룹 참여", "감사 기록하기"], today: "오늘 하루 감사 3가지를 메모하며, 하나님이 주신 은혜를 다시 떠올려보세요.", prayer: "하나님, 흔들리는 순간에도 주님께 다시 돌아오는 마음을 지켜주세요." },
+      { min: 30, max: 37, name: "자라나는 믿음", tone: "🌳", color: "#3e6a52", desc: "당신의 믿음은 삶 속에서 실제로 자라고 있습니다. 하나님을 의식하며 선택하려는 마음이 있고, 신앙이 일상에 스며들기 시작했습니다.", keywords: ["성장", "감사", "순종"], growth: ["기도 제목 나누기", "섬김에 참여하기", "어려운 상황에서도 말씀 붙들기"], today: "오늘 누군가를 위해 짧은 중보기도를 드리며 믿음의 따뜻함을 나눠보세요.", prayer: "주님, 제 일상이 주님을 닮아가게 하시고, 작은 선택에서도 순종하게 하소서." },
+      { min: 38, max: 43, name: "단단한 믿음", tone: "🕊️", color: "#2f5a45", desc: "당신은 신앙을 단순한 감정이 아니라 삶의 기준으로 삼으려는 사람입니다. 고난 속에서도 하나님을 신뢰하려는 태도가 강합니다.", keywords: ["순종", "섬김", "말씀"], growth: ["다른 사람을 세우는 섬김", "말씀을 삶에 적용하기", "영적 리더십 훈련"], today: "오늘 한 사람을 구체적으로 격려하며, 믿음의 언어로 힘을 전해보세요.", prayer: "하나님, 제 믿음이 저에게만 머물지 않고 공동체를 세우는 통로가 되게 하소서." },
+      { min: 44, max: 48, name: "사명으로 타오르는 믿음", tone: "🔥", color: "#8a6a2f", desc: "당신의 믿음은 개인적인 신앙을 넘어 주변 사람에게 선한 영향력을 주는 단계에 있습니다. 하나님이 맡기신 자리에서 빛과 소금의 역할을 감당하려는 마음이 큽니다.", keywords: ["사명", "섬김", "기도"], growth: ["전도와 양육", "공동체 리더십", "겸손을 지키는 영적 훈련"], today: "오늘 하나님이 맡기신 자리 한 곳을 정하고, 사명 의식으로 섬길 한 가지를 실천해보세요.", prayer: "주님, 제 열심이 아닌 주님의 사랑으로 사람을 섬기게 하시고, 늘 겸손하게 하소서." }
     ];
 
     const state = { current: 0, answers: Array(questions.length).fill(null) };
+    const $ = id => document.getElementById(id);
 
-    const startScreen = document.getElementById("startScreen");
-    const questionScreen = document.getElementById("questionScreen");
-    const resultScreen = document.getElementById("resultScreen");
-
-    const progressLabel = document.getElementById("progressLabel");
-    const progressBar = document.getElementById("progressBar");
-    const questionText = document.getElementById("questionText");
-    const optionsEl = document.getElementById("options");
-    const prevBtn = document.getElementById("prevBtn");
-
-    const resultEmoji = document.getElementById("resultEmoji");
-    const resultTitle = document.getElementById("resultTitle");
-    const resultDescription = document.getElementById("resultDescription");
-    const resultTags = document.getElementById("resultTags");
-    const matchFlower = document.getElementById("matchFlower");
-    const giftLine = document.getElementById("giftLine");
-    const shareText = document.getElementById("shareText");
-    const copyFeedback = document.getElementById("copyFeedback");
-
-    function showScreen(target) {
-      [startScreen, questionScreen, resultScreen].forEach(s => s.classList.remove("active"));
-      target.classList.add("active");
+    function show(id) {
+      ["startScreen", "questionScreen", "resultScreen"].forEach(key => $(key).classList.remove("active"));
+      $(id).classList.add("active");
     }
 
-    // 현재 문항 렌더링 + 진행률 업데이트
     function renderQuestion() {
       const idx = state.current;
       const item = questions[idx];
-      questionText.textContent = item.q;
-      progressLabel.textContent = `${idx + 1} / ${questions.length}`;
-      progressBar.style.width = `${((idx + 1) / questions.length) * 100}%`;
+      $("questionText").textContent = item.q;
+      $("progressLabel").textContent = `${idx + 1} / ${questions.length}`;
+      $("progressBar").style.width = `${((idx + 1) / questions.length) * 100}%`;
 
-      optionsEl.innerHTML = "";
-      item.a.forEach(([text, type], optionIndex) => {
+      const options = $("options");
+      options.innerHTML = "";
+      item.options.forEach(([text, score], i) => {
         const btn = document.createElement("button");
         btn.className = "option";
         btn.textContent = text;
-
-        if (state.answers[idx]?.optionIndex === optionIndex) btn.classList.add("selected");
-
+        if (state.answers[idx]?.choice === i) btn.classList.add("selected");
         btn.onclick = () => {
-          state.answers[idx] = { optionIndex, type };
-          btn.classList.add("selected");
-
-          // 선택 즉시 다음 질문으로 이동
+          state.answers[idx] = { choice: i, score };
           if (idx < questions.length - 1) {
             state.current += 1;
-            setTimeout(renderQuestion, 140);
+            setTimeout(renderQuestion, 90);
           } else {
-            setTimeout(showResult, 160);
+            setTimeout(showResult, 90);
           }
         };
-        optionsEl.appendChild(btn);
+        options.appendChild(btn);
       });
 
-      prevBtn.disabled = idx === 0;
-      prevBtn.style.opacity = idx === 0 ? 0.45 : 1;
-      prevBtn.style.cursor = idx === 0 ? "not-allowed" : "pointer";
+      const prev = $("prevBtn");
+      prev.disabled = idx === 0;
+      prev.style.opacity = idx === 0 ? "0.45" : "1";
     }
 
-    // 점수 집계 후 최고 점수 꽃 선택 (동점 시 priority 높은 감성형 우선)
-    function pickFlower() {
-      const scores = Object.keys(flowerProfiles).reduce((acc, key) => (acc[key] = 0, acc), {});
-      state.answers.forEach(answer => { if (answer) scores[answer.type] += 1; });
+    function pickResult(score) {
+      return results.find(r => score >= r.min && score <= r.max);
+    }
 
-      const sorted = Object.entries(scores).sort((a, b) => {
-        const scoreDiff = b[1] - a[1];
-        if (scoreDiff !== 0) return scoreDiff;
-        return flowerProfiles[b[0]].priority - flowerProfiles[a[0]].priority;
-      });
-      return sorted[0][0];
+    function makeShareText(res, score, percent) {
+      return `🌿 나의 믿음 테스트 결과\n유형: ${res.name}\n총점: ${score}점 (믿음 지수 ${percent}%)\n\n${res.today}\n#나의믿음테스트 #신앙테스트 #청년부테스트`;
     }
 
     function showResult() {
-      const key = pickFlower();
-      const flower = flowerProfiles[key];
+      const score = state.answers.reduce((sum, a) => sum + (a?.score || 0), 0);
+      const percent = Math.round((score / 48) * 100);
+      const res = pickResult(score);
+      const share = makeShareText(res, score, percent);
 
-      resultEmoji.textContent = flower.emoji;
-      resultTitle.textContent = `당신의 꽃은 ${flower.name}입니다`;
-      resultDescription.textContent = flower.description;
-      resultTags.innerHTML = flower.keywords.map(k => `<span class="tag">${k}</span>`).join("");
-      matchFlower.textContent = flower.match;
-      giftLine.textContent = flower.gift;
-      shareText.textContent = `공유 문구: ${flower.share}`;
+      $("resultBadge").textContent = `${res.tone} 결과 유형`;
+      $("resultBadge").style.background = `${res.color}1a`;
+      $("resultBadge").style.color = res.color;
+      $("resultTitle").textContent = `당신의 믿음 유형은 ${res.name}입니다`;
+      $("resultDesc").textContent = res.desc;
+      $("scoreText").textContent = `${score}점 / 48점`;
+      $("percentText").textContent = `당신의 믿음 지수는 ${percent}%입니다.`;
+      $("tags").innerHTML = res.keywords.map(k => `<span class="tag">${k}</span>`).join("");
+      $("growthBox").innerHTML = `<strong>추천 성장 방향 3가지</strong><br>• ${res.growth[0]}<br>• ${res.growth[1]}<br>• ${res.growth[2]}`;
+      $("todayLine").innerHTML = `<strong>오늘의 적용 문장</strong><br>${res.today}`;
+      $("prayer").innerHTML = `<strong>짧은 기도문</strong><br>${res.prayer}`;
+      $("shareBox").innerHTML = `<strong>공유용 문구</strong><br>${share.replace(/\n/g, "<br>")}`;
 
-      showScreen(resultScreen);
+      localStorage.setItem("faithTestLastResult", JSON.stringify({ score, percent, resultName: res.name, share, timestamp: Date.now() }));
+      $("copyBtn").dataset.share = share;
+      $("copyFeedback").textContent = "";
+      show("resultScreen");
     }
 
     function startTest() {
       state.current = 0;
       state.answers = Array(questions.length).fill(null);
-      copyFeedback.textContent = "";
-      showScreen(questionScreen);
+      show("questionScreen");
       renderQuestion();
     }
 
-    document.getElementById("startBtn").addEventListener("click", startTest);
-    prevBtn.addEventListener("click", () => {
+    function restoreSavedResult() {
+      const saved = localStorage.getItem("faithTestLastResult");
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        const intro = document.createElement("p");
+        intro.className = "desc";
+        intro.innerHTML = `최근 결과가 저장되어 있어요: <strong>${data.resultName}</strong> · ${data.score}점 (${data.percent}%)<br>원하면 테스트를 다시 진행해도 좋아요.`;
+        $("startScreen").insertBefore(intro, $("startBtn"));
+      } catch (e) {
+        localStorage.removeItem("faithTestLastResult");
+      }
+    }
+
+    $("startBtn").addEventListener("click", startTest);
+    $("prevBtn").addEventListener("click", () => {
       if (state.current > 0) {
         state.current -= 1;
         renderQuestion();
       }
     });
-
-    document.getElementById("restartBtn").addEventListener("click", () => {
-      showScreen(startScreen);
-    });
-
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      const line = shareText.textContent.replace("공유 문구: ", "");
+    $("restartBtn").addEventListener("click", () => show("startScreen"));
+    $("copyBtn").addEventListener("click", async () => {
+      const text = $("copyBtn").dataset.share || "";
       try {
-        await navigator.clipboard.writeText(line);
-        copyFeedback.textContent = "결과 문구가 복사되었어요. 소중한 사람에게 공유해보세요 ✨";
-      } catch {
-        copyFeedback.textContent = "복사에 실패했어요. 문구를 길게 눌러 직접 복사해주세요.";
+        await navigator.clipboard.writeText(text);
+        $("copyFeedback").textContent = "공유 문구가 복사되었어요. 카카오톡/인스타그램 스토리에 나눠보세요 ✨";
+      } catch (e) {
+        $("copyFeedback").textContent = "복사에 실패했어요. 문구를 길게 눌러 직접 복사해 주세요.";
       }
     });
+
+    // 페이지가 열리면 저장된 최근 결과 안내 문구를 시작 화면에 표시
+    restoreSavedResult();
   </script>
 </body>
 </html>
