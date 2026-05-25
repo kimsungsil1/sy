@@ -1,1 +1,421 @@
-1
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 마음속 꽃은 무엇일까? | 꽃 심리테스트</title>
+  <meta name="description" content="당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다. 감성적인 꽃 심리테스트를 지금 시작해보세요." />
+  <meta name="keywords" content="꽃 심리테스트, 성격테스트, 꽃 테스트, 나에게 어울리는 꽃, 연애 심리테스트" />
+  <meta property="og:title" content="내 마음속 꽃은 무엇일까?" />
+  <meta property="og:description" content="당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다." />
+  <style>
+    :root {
+      --rose: #b84f6b;
+      --cream: #fff7ef;
+      --lavender: #c9b6e4;
+      --green: #9ab89a;
+      --ink: #4c4052;
+      --card: rgba(255, 255, 255, 0.82);
+      --shadow: 0 18px 45px rgba(116, 95, 126, 0.18);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 20% 15%, #ffe8f0 0%, transparent 40%),
+                  radial-gradient(circle at 85% 20%, #e8f6ec 0%, transparent 40%),
+                  radial-gradient(circle at 50% 95%, #efe8fb 0%, transparent 35%),
+                  linear-gradient(140deg, #fff9f1, #f7f0ff 45%, #eef8f1 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px 14px;
+      overflow-x: hidden;
+    }
+
+    .petals, .petals::before, .petals::after {
+      content: "";
+      position: fixed;
+      inset: -20% -10% auto;
+      height: 140%;
+      pointer-events: none;
+      background-image:
+        radial-gradient(ellipse at center, rgba(255, 171, 200, .42) 0 38%, transparent 40%),
+        radial-gradient(ellipse at center, rgba(207, 185, 238, .33) 0 38%, transparent 40%),
+        radial-gradient(ellipse at center, rgba(168, 213, 174, .28) 0 38%, transparent 40%);
+      background-size: 24px 16px, 18px 12px, 22px 14px;
+      animation: drift 26s linear infinite;
+      opacity: .45;
+      transform: rotate(9deg);
+    }
+
+    .petals::before { animation-duration: 34s; opacity: .3; transform: rotate(-5deg); }
+    .petals::after { animation-duration: 42s; opacity: .2; transform: rotate(15deg); }
+
+    @keyframes drift {
+      from { background-position: 0 -20%, 60% -20%, 30% -20%; }
+      to { background-position: -120px 120%, 70px 120%, -60px 120%; }
+    }
+
+    .card {
+      width: min(720px, 100%);
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, .7);
+      padding: clamp(22px, 4vw, 38px);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 { font-size: clamp(1.7rem, 4.2vw, 2.3rem); margin: 0 0 10px; line-height: 1.3; }
+    .subtitle { margin: 0 0 26px; color: #6a5c73; line-height: 1.6; }
+
+    .screen { display: none; animation: fade .35s ease; }
+    .screen.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+      font-size: .98rem;
+    }
+
+    .btn-main {
+      color: #fff;
+      background: linear-gradient(135deg, #c96886, #9f77d7 55%, #7bad89);
+      box-shadow: 0 12px 24px rgba(144, 102, 153, .28);
+    }
+
+    .btn-main:hover { transform: translateY(-1px); filter: saturate(1.05); }
+    .btn-soft { background: #fff; color: #6f5c7b; border: 1px solid #eadff6; }
+
+    .progress-wrap { margin: 0 0 18px; }
+    .progress-top { display: flex; justify-content: space-between; font-size: .9rem; color: #786986; margin-bottom: 7px; }
+    .bar { height: 10px; border-radius: 999px; background: #f2e8f8; overflow: hidden; }
+    .bar > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ef93af, #b899e4, #a9d0ae); transition: width .25s ease; }
+
+    .question { font-size: clamp(1.2rem, 3vw, 1.45rem); margin: 12px 0 18px; line-height: 1.5; }
+    .options { display: grid; gap: 11px; }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #f1e8f6;
+      border-radius: 16px;
+      padding: 14px 15px;
+      color: #574a60;
+      font-size: .98rem;
+      transition: .2s;
+      cursor: pointer;
+    }
+    .option:hover { border-color: #cfb6e8; transform: translateY(-1px); box-shadow: 0 8px 16px rgba(144,120,160,.12); }
+    .option.selected { border-color: #bf89d8; background: #fcf7ff; }
+
+    .nav { display: flex; justify-content: space-between; margin-top: 18px; gap: 10px; }
+
+    .result-flower { font-size: 3rem; margin-bottom: 4px; }
+    .result-title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin: 4px 0 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
+    .tag { background: #fff; border: 1px solid #eadcf5; padding: 7px 11px; border-radius: 999px; font-size: .87rem; }
+    .result-box { background: #fff; border: 1px solid #efe5f7; border-radius: 14px; padding: 13px 14px; margin: 10px 0; line-height: 1.6; }
+
+    .result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .copy-feedback { font-size: .9rem; color: #6c8b71; margin-top: 8px; min-height: 20px; }
+
+    @media (max-width: 520px) {
+      .card { padding: 20px 16px; border-radius: 20px; }
+      .btn { width: 100%; }
+      .nav { flex-direction: column; }
+      .progress-top { font-size: .85rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="petals" aria-hidden="true"></div>
+
+  <main class="card" role="main">
+    <section id="startScreen" class="screen active">
+      <h1>내 마음속 꽃은 무엇일까?</h1>
+      <p class="subtitle">당신의 성향과 감정 패턴을 바탕으로 가장 잘 어울리는 꽃을 찾아드립니다.</p>
+      <button class="btn btn-main" id="startBtn">테스트 시작하기</button>
+    </section>
+
+    <section id="questionScreen" class="screen">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="progressLabel">1 / 10</span>
+          <span>마음의 결을 천천히 담아보세요</span>
+        </div>
+        <div class="bar"><span id="progressBar"></span></div>
+      </div>
+      <h2 class="question" id="questionText"></h2>
+      <div class="options" id="options"></div>
+      <div class="nav">
+        <button class="btn btn-soft" id="prevBtn">이전 질문</button>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen">
+      <div class="result-flower" id="resultEmoji"></div>
+      <h2 class="result-title" id="resultTitle"></h2>
+      <p id="resultDescription"></p>
+      <div class="tags" id="resultTags"></div>
+      <div class="result-box" id="matchFlower"></div>
+      <div class="result-box" id="giftLine"></div>
+      <div class="result-box" id="shareText"></div>
+      <div class="result-actions">
+        <button class="btn btn-main" id="copyBtn">결과 문구 복사</button>
+        <button class="btn btn-soft" id="restartBtn">다시하기</button>
+      </div>
+      <p class="copy-feedback" id="copyFeedback"></p>
+    </section>
+  </main>
+
+  <script>
+    // 꽃 결과 데이터: 설명, 키워드, 공유 문구 등을 한 곳에서 관리
+    const flowerProfiles = {
+      rose: {
+        name: "장미", emoji: "🌹", priority: 8,
+        keywords: ["열정", "사랑", "존재감"],
+        description: "감정을 숨기지 않고 진심으로 표현하는 당신은, 관계에 깊고 강한 온도를 남깁니다.",
+        match: "나와 잘 맞는 꽃: 튤립 🌷 — 섬세한 다정함이 당신의 열정을 안정감 있게 받쳐줘요.",
+        gift: "어울리는 선물 문구: ‘당신의 오늘을 가장 찬란하게 믿는 사람으로 남을게요.’",
+        share: "나는 강렬한 진심을 가진 장미형 🌹, 사랑을 뜨겁고 솔직하게 전하는 사람이래."
+      },
+      tulip: {
+        name: "튤립", emoji: "🌷", priority: 7,
+        keywords: ["순수함", "설렘", "따뜻함"],
+        description: "부드럽지만 흔들리지 않는 마음으로, 사람의 하루를 따뜻하게 물들이는 유형입니다.",
+        match: "나와 잘 맞는 꽃: 작약 🌺 — 당신의 순수함을 우아하게 확장해주는 파트너예요.",
+        gift: "어울리는 선물 문구: ‘당신과 함께라면 평범한 날도 봄처럼 설레요.’",
+        share: "나는 포근한 진심의 튤립형 🌷, 작은 배려로 큰 설렘을 만드는 사람이래."
+      },
+      sunflower: {
+        name: "해바라기", emoji: "🌻", priority: 6,
+        keywords: ["긍정", "에너지", "응원"],
+        description: "주변 사람의 가능성을 먼저 발견하고, 밝은 에너지로 분위기를 끌어올리는 사람입니다.",
+        match: "나와 잘 맞는 꽃: 라벤더 💜 — 당신의 활기를 편안한 리듬으로 이어줘요.",
+        gift: "어울리는 선물 문구: ‘당신 덕분에 내 내일이 조금 더 환해졌어요.’",
+        share: "나는 햇살 같은 해바라기형 🌻, 사람들에게 용기와 힘을 나눠주는 타입이래."
+      },
+      lavender: {
+        name: "라벤더", emoji: "💜", priority: 10,
+        keywords: ["안정", "위로", "섬세함"],
+        description: "조용한 공감력으로 사람의 마음을 어루만지며, 깊은 신뢰를 만드는 감성형입니다.",
+        match: "나와 잘 맞는 꽃: 장미 🌹 — 당신의 차분함이 상대의 진심을 더 깊게 피워내요.",
+        gift: "어울리는 선물 문구: ‘말하지 않아도 네 마음의 결을 알아차릴게.’",
+        share: "나는 잔잔한 위로의 라벤더형 💜, 깊은 공감으로 관계를 지켜주는 사람이래."
+      },
+      gypsophila: {
+        name: "안개꽃", emoji: "🤍", priority: 9,
+        keywords: ["배려", "조화", "순수함"],
+        description: "앞에 나서지 않아도 모두를 빛나게 하는 균형감으로, 관계의 온도를 부드럽게 맞춥니다.",
+        match: "나와 잘 맞는 꽃: 해바라기 🌻 — 당신의 배려가 상대의 에너지를 더 멀리 퍼지게 해요.",
+        gift: "어울리는 선물 문구: ‘당신 덕분에 우리의 순간이 더 다정해졌어요.’",
+        share: "나는 조화를 만드는 안개꽃형 🤍, 조용한 배려로 주변을 환하게 하는 사람이래."
+      },
+      peony: {
+        name: "작약", emoji: "🌺", priority: 5,
+        keywords: ["우아함", "풍요", "로맨틱"],
+        description: "감각적인 취향과 풍부한 감정선으로, 일상에 품격 있는 로맨스를 더하는 유형입니다.",
+        match: "나와 잘 맞는 꽃: 튤립 🌷 — 서로의 다정함과 감성을 자연스럽게 키워가요.",
+        gift: "어울리는 선물 문구: ‘당신과의 순간을 오래 기억할 수 있게, 예쁘게 담아둘게요.’",
+        share: "나는 로맨틱한 작약형 🌺, 감각과 애정으로 특별한 분위기를 만드는 사람이래."
+      },
+      camellia: {
+        name: "동백", emoji: "❤️", priority: 4,
+        keywords: ["신념", "헌신", "따뜻한 강인함"],
+        description: "쉽게 흔들리지 않는 중심을 가진 당신은, 오래가는 관계에서 진가를 발휘합니다.",
+        match: "나와 잘 맞는 꽃: 안개꽃 🤍 — 당신의 단단함을 부드럽게 감싸주는 조합이에요.",
+        gift: "어울리는 선물 문구: ‘변함없이 네 편이라는 마음을 매일 증명할게.’",
+        share: "나는 따뜻하게 단단한 동백형 ❤️, 오래 믿고 지켜주는 사랑을 하는 사람이래."
+      }
+    };
+
+    // 10문항, 선택지 4개. 각 선택지는 하나의 꽃 유형에 점수를 부여
+    const questions = [
+      { q: "쉬는 날이 생기면 가장 먼저 하고 싶은 건?", a: [
+        ["좋아하는 사람과 분위기 좋은 카페에서 긴 대화", "rose"],
+        ["햇살 좋은 창가에서 책과 차로 느긋하게", "lavender"],
+        ["즉흥으로 근교 나들이, 사진 가득 남기기", "sunflower"],
+        ["집을 정돈하고 향초 켜둔 채 조용히 쉬기", "gypsophila"]] },
+      { q: "받고 싶은 선물의 결은 어떤 쪽에 가까울까?", a: [
+        ["손편지처럼 마음이 또렷한 선물", "tulip"],
+        ["오래 두고 볼수록 멋이 나는 소품", "peony"],
+        ["함께한 추억이 담긴 작은 기록", "gypsophila"],
+        ["강렬한 인상을 남기는 서프라이즈", "rose"]] },
+      { q: "인간관계에서 나는 보통…", a: [
+        ["누구에게나 에너지를 건네는 편", "sunflower"],
+        ["깊어질 사람에게 천천히 마음을 열어", "lavender"],
+        ["상대의 필요를 먼저 살피는 편", "gypsophila"],
+        ["확신이 생기면 끝까지 책임지는 편", "camellia"]] },
+      { q: "사랑을 표현할 때 가장 나다운 방식은?", a: [
+        ["감정을 솔직하게 말과 행동으로 보여준다", "rose"],
+        ["작은 루틴을 꾸준히 지키며 마음을 전한다", "camellia"],
+        ["상대가 좋아할 디테일을 기억해 챙긴다", "tulip"],
+        ["특별한 분위기와 이벤트를 연출한다", "peony"]] },
+      { q: "스트레스를 받으면 나는…", a: [
+        ["몸을 움직이며 기분을 빠르게 환기한다", "sunflower"],
+        ["혼자 있는 시간을 확보하고 감정을 정리한다", "lavender"],
+        ["믿는 사람과 깊게 대화하며 풀어낸다", "rose"],
+        ["정리·청소로 환경부터 안정시킨다", "gypsophila"]] },
+      { q: "가장 오래 머물고 싶은 공간은?", a: [
+        ["은은한 조명과 패브릭이 있는 감성 라운지", "peony"],
+        ["햇빛과 식물이 많은 밝은 거실", "sunflower"],
+        ["미니멀하고 조용한 개인 작업실", "lavender"],
+        ["포근하고 정돈된 다이닝 공간", "tulip"]] },
+      { q: "요즘 더 끌리는 색감은?", a: [
+        ["딥 로즈와 와인 톤", "rose"],
+        ["크림 베이지와 소프트 핑크", "tulip"],
+        ["라일락·뮤트 퍼플", "lavender"],
+        ["올리브·세이지 그린", "gypsophila"]] },
+      { q: "기억에 남는 순간은 어떤 장면이야?", a: [
+        ["서로의 진심을 확인한 고백의 밤", "rose"],
+        ["별일 없어도 웃음이 끊이지 않던 오후", "sunflower"],
+        ["말없이 함께 걸으며 위로받던 시간", "lavender"],
+        ["작은 성공을 함께 축하해준 자리", "camellia"]] },
+      { q: "사람들이 자주 말하는 나의 이미지는?", a: [
+        ["우아하고 취향이 분명한 사람", "peony"],
+        ["편안하고 다정한 사람", "tulip"],
+        ["믿음직하고 묵직한 사람", "camellia"],
+        ["부드럽게 분위기를 맞추는 사람", "gypsophila"]] },
+      { q: "내가 바라는 삶의 분위기에 가장 가까운 건?", a: [
+        ["사랑과 열정이 선명한 인생", "rose"],
+        ["잔잔하지만 깊게 충만한 인생", "lavender"],
+        ["환하고 활기찬 순간이 많은 인생", "sunflower"],
+        ["감각적이고 로맨틱한 장면이 이어지는 인생", "peony"]] }
+    ];
+
+    const state = { current: 0, answers: Array(questions.length).fill(null) };
+
+    const startScreen = document.getElementById("startScreen");
+    const questionScreen = document.getElementById("questionScreen");
+    const resultScreen = document.getElementById("resultScreen");
+
+    const progressLabel = document.getElementById("progressLabel");
+    const progressBar = document.getElementById("progressBar");
+    const questionText = document.getElementById("questionText");
+    const optionsEl = document.getElementById("options");
+    const prevBtn = document.getElementById("prevBtn");
+
+    const resultEmoji = document.getElementById("resultEmoji");
+    const resultTitle = document.getElementById("resultTitle");
+    const resultDescription = document.getElementById("resultDescription");
+    const resultTags = document.getElementById("resultTags");
+    const matchFlower = document.getElementById("matchFlower");
+    const giftLine = document.getElementById("giftLine");
+    const shareText = document.getElementById("shareText");
+    const copyFeedback = document.getElementById("copyFeedback");
+
+    function showScreen(target) {
+      [startScreen, questionScreen, resultScreen].forEach(s => s.classList.remove("active"));
+      target.classList.add("active");
+    }
+
+    // 현재 문항 렌더링 + 진행률 업데이트
+    function renderQuestion() {
+      const idx = state.current;
+      const item = questions[idx];
+      questionText.textContent = item.q;
+      progressLabel.textContent = `${idx + 1} / ${questions.length}`;
+      progressBar.style.width = `${((idx + 1) / questions.length) * 100}%`;
+
+      optionsEl.innerHTML = "";
+      item.a.forEach(([text, type], optionIndex) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = text;
+
+        if (state.answers[idx]?.optionIndex === optionIndex) btn.classList.add("selected");
+
+        btn.onclick = () => {
+          state.answers[idx] = { optionIndex, type };
+          btn.classList.add("selected");
+
+          // 선택 즉시 다음 질문으로 이동
+          if (idx < questions.length - 1) {
+            state.current += 1;
+            setTimeout(renderQuestion, 140);
+          } else {
+            setTimeout(showResult, 160);
+          }
+        };
+        optionsEl.appendChild(btn);
+      });
+
+      prevBtn.disabled = idx === 0;
+      prevBtn.style.opacity = idx === 0 ? 0.45 : 1;
+      prevBtn.style.cursor = idx === 0 ? "not-allowed" : "pointer";
+    }
+
+    // 점수 집계 후 최고 점수 꽃 선택 (동점 시 priority 높은 감성형 우선)
+    function pickFlower() {
+      const scores = Object.keys(flowerProfiles).reduce((acc, key) => (acc[key] = 0, acc), {});
+      state.answers.forEach(answer => { if (answer) scores[answer.type] += 1; });
+
+      const sorted = Object.entries(scores).sort((a, b) => {
+        const scoreDiff = b[1] - a[1];
+        if (scoreDiff !== 0) return scoreDiff;
+        return flowerProfiles[b[0]].priority - flowerProfiles[a[0]].priority;
+      });
+      return sorted[0][0];
+    }
+
+    function showResult() {
+      const key = pickFlower();
+      const flower = flowerProfiles[key];
+
+      resultEmoji.textContent = flower.emoji;
+      resultTitle.textContent = `당신의 꽃은 ${flower.name}입니다`;
+      resultDescription.textContent = flower.description;
+      resultTags.innerHTML = flower.keywords.map(k => `<span class="tag">${k}</span>`).join("");
+      matchFlower.textContent = flower.match;
+      giftLine.textContent = flower.gift;
+      shareText.textContent = `공유 문구: ${flower.share}`;
+
+      showScreen(resultScreen);
+    }
+
+    function startTest() {
+      state.current = 0;
+      state.answers = Array(questions.length).fill(null);
+      copyFeedback.textContent = "";
+      showScreen(questionScreen);
+      renderQuestion();
+    }
+
+    document.getElementById("startBtn").addEventListener("click", startTest);
+    prevBtn.addEventListener("click", () => {
+      if (state.current > 0) {
+        state.current -= 1;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("restartBtn").addEventListener("click", () => {
+      showScreen(startScreen);
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const line = shareText.textContent.replace("공유 문구: ", "");
+      try {
+        await navigator.clipboard.writeText(line);
+        copyFeedback.textContent = "결과 문구가 복사되었어요. 소중한 사람에게 공유해보세요 ✨";
+      } catch {
+        copyFeedback.textContent = "복사에 실패했어요. 문구를 길게 눌러 직접 복사해주세요.";
+      }
+    });
+  </script>
+</body>
+</html>
